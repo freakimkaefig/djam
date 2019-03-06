@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>DJ-Projekt v0.4</title>
+		<link rel="stylesheet" type="text/css" href="css/app.css" />
+		<link rel="stylesheet" type="text/css" href="css/jquery-ui-1.8.18.custom.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="fancybox/jquery.fancybox-1.3.4.css" />
+		<script src="js/libs/jquery-1.7.1.min.js"></script>
+		<script src="js/libs/jQueryRotateCompressed.2.1.js"></script>
+		<script src="js/libs/jquery-ui-1.8.18.custom.min.js"></script>
+		<script src="js/libs/jquery.easing.compatibility.js"></script>
+		<script src="js/libs/jquery.gallery.js"></script>
+		<script src="js/libs/modernizr.custom.53451.js"></script>
+		<script src="fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+		
+	</head>
+	<body class="overflow-hidden">
+		<div id="loadingSign"><span>loading...</span></div>
+		<img src="images/curtainLeft.jpg" id="curtainLeft" class="curtain">
+		<img src="images/curtainRight.jpg" id="curtainRight" class="curtain">
+		<div id="loadingOverlay">
+		</div>
+		
+		<div id="app" class="invisible">
+			<div id="oben">
+				<div id="metronomWrapper">
+					<div id="metronomBeat1" class="metronomBeat"></div>
+					<div id="metronomBeat2" class="metronomBeat"></div>
+					<div id="metronomBeat3" class="metronomBeat"></div>
+					<div id="metronomBeat4" class="metronomBeat"></div>
+				</div>
+				
+				
+				<div id="groovyWrapper">
+					<img id="groovyImage" src="images/groovy.png">
+					<img id="groovyImageBubble" src="images/bubble.png">
+					<img id="groovyThinkBubble" src="images/think-bubble.png">
+					<div id="groovyThinkBubbleContent">?</div>
+					<div id="groovyInfo" >INFO:<br>Hallo ich bin Groovy<br>Was geht ab!</div>
+				</div>
+					<button id="btn_help"><a class="help" href="help.html">Hilfe</a></button>
+				<div id="filterWrapper" class="metalpattern boxshadow">
+					<div id="filterLow" >
+						<div class="filter-module-label">Tiefpass</div>
+						
+						<div id="f_block_btn">
+						<button class="f-button" id="fl_btn_TellerLeft">Platte Links</button>
+						<button class="f-button" id="fl_btn_TellerRight">Platte Rechts</button>
+						<button class="f-button" id="fl_btn_Drummachine">Drummachine</button>
+						<button class="f-button" id="fl_btn_Track1">Track 1</button>
+						<button class="f-button" id="fl_btn_Track2">Track 2</button>
+						<button class="f-button" id="fl_btn_Track3">Track 3</button>
+						<button class="f-button" id="fl_btn_Track4">Track 4</button>
+						</div>
+						
+						<div class="slider-container">
+						<div id="filterLowSlider" class="slider-horizontal"></div>
+						</div>
+					</div>	
+					<div id="filterHigh" >
+						<div class="filter-module-label">Hochpass</div>
+						<div id="f_block_btn">
+						<button class="f-button" id="fh_btn_TellerLeft">Platte Links</button>
+						<button class="f-button" id="fh_btn_TellerRight">Platte Rechts</button>
+						<button class="f-button" id="fh_btn_Drummachine">Drummachine</button>
+						<button class="f-button" id="fh_btn_Track1">Track 1</button>
+						<button class="f-button" id="fh_btn_Track2">Track 2</button>
+						<button class="f-button" id="fh_btn_Track3">Track 3</button>
+						<button class="f-button" id="fh_btn_Track4">Track 4</button>
+						</div>
+						<div class="slider-container">
+						<div id="filterHighSlider" class="slider-horizontal"></div>
+						</div>
+					</div>
+				</div>
+				
+				<div id="logoWrapper"></div>
+			</div>
+			
+			<div id="mitte">
+				
+				<!-- Turntable Left -->
+				<div id="turntableLeftWrapper" class="metalpattern boxshadow turntableWrapper">
+					<div class="tt-body"></div>
+					<div id="plattenteller-left" class="plattenteller"></div>
+					<div id="arm_left_dragzone" class="dragzone"></div>
+					<div id="arm_left" draggable="true" class="arm">
+						<img id="img_arm_left" src="images/arm.png" class="cursor-pointer">
+					</div>
+					<button id="btn_ttLeft" class="btn-tt-playPause">Start</button>
+				</div>
+				<!-- Equalizer -->
+				<div id="equalizerWrapper" class="metalpattern boxshadow">
+					<div id="eqMaster" class="equalizerModuleWrapper">
+						<div class="eq-module-label">Master</div>
+						<div>
+							<button class="btn_hidden"></button>
+						</div>
+						<div class="slider-container">
+							<div id="masterSlider" class="slider-vertical"></div>
+						</div>
+					</div>
+					<div id="eqDrumMachine" class="equalizerModuleWrapper">
+						<div class="eq-module-label">Drum Machine</div>
+						<div>
+							<button id="eq_btn_drum_mute">M</button>
+							<button id="eq_btn_drum_solo">S</button>
+						</div>
+						<div class="slider-container">
+							<div id="drummachineSlider" class="slider-vertical"></div>
+						</div>
+					</div>
+					<div id="eqTurntables" class="equalizerModuleWrapper">
+						<div class="eq-module-label">Turntables</div>
+						<div>
+							<button id="eq_btn_tt_mute">M</button>
+							<button id="eq_btn_tt_solo">S</button>
+						</div>
+						<div class="slider-container">
+							<div id="ttLeftSlider" class="slider-vertical"></div>
+							<div id="tt-label-left">L</div>
+						</div>
+						<div class="slider-container">
+							<div id="ttRightSlider" class="slider-vertical"></div>
+							<div id="tt-label-right">R</div>
+						</div>
+						<div class="slider-container">
+							<div id="ttCrossfadeSlider" class="slider-horizontal"></div>
+						</div>
+					</div>
+					<div id="eqTracks" class="equalizerModuleWrapper">
+						<div class="eq-module-label">Tracks</div>
+						<div id="eqTrackWrapper">
+							<div class="slider-container">
+								<button id="eq_btn_track1_mute">M</button>
+								<button id="eq_btn_track1_solo">S</button>
+								<div class="btn-tracks"></div>
+								<div id="track1Slider" class="slider-vertical"></div>
+								<div class="label-tracks">1</div>
+							</div>
+							<div class="slider-container">
+								<button id="eq_btn_track2_mute">M</button>
+								<button id="eq_btn_track2_solo">S</button>
+								<div class="btn-tracks"></div>
+								<div id="track2Slider" class="slider-vertical"></div>
+								<div class="label-tracks">2</div>
+							</div>
+							<div class="slider-container">
+								<button id="eq_btn_track3_mute">M</button>
+								<button id="eq_btn_track3_solo">S</button>
+								<div class="btn-tracks"></div>
+								<div id="track3Slider" class="slider-vertical"></div>
+								<div class="label-tracks">3</div>
+							</div>
+							<div class="slider-container">
+								<button id="eq_btn_track4_mute">M</button>
+								<button id="eq_btn_track4_solo">S</button>
+								<div class="btn-tracks"></div>
+								<div id="track4Slider" class="slider-vertical"></div>
+								<div class="label-tracks">4</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<!-- Turntable Right -->
+				<div id="turntableRightWrapper" class="metalpattern boxshadow turntableWrapper">
+					<div class="tt-body"></div>
+					<div id="plattenteller-right" class="plattenteller" style="-webkit-transform: rotate3d(0, 0, 1, 0deg);"></div>
+					<div id="arm_right_dragzone" class="dragzone"></div>
+					<div id="arm_right" draggable="true" class="arm">
+						<img id="img_arm_right" src="images/arm.png" class="cursor-pointer">
+					</div>
+					<button id="btn_ttRight" class="btn-tt-playPause">Start</button>
+				</div>
+			</div>
+			
+			<div id="unten">
+				
+				<!-- Spuren -->
+				<div id="spurenWrapper" class="metalpattern boxshadow">
+					<!-- Track 1-->
+					<div class="track-label">Track 1: </div>
+					<img id="btn_track1previous" class="previous-arrow" src="images/btn_previous.png">
+					<div id="track1Select" class="trackWahl-wrapper unselectedTrack">
+						<div id="Wahl_Track1" class="trackWahl-label">choose Sample</div>
+						<img id="btn_track2Wahl" class="select-arrow" src="images/btn_list.png">
+					</div>
+					<img id="btn_track1next" class="next-arrow" src="images/btn_next.png">
+					<button class="btn_track_play" id="btn_track1_play">Start</button>
+					<!-- Track 2 -->
+					<div class="track-label">Track 2: </div>
+					<img id="btn_track2previous" class="previous-arrow" src="images/btn_previous.png">
+					<div id="track2Select" class="trackWahl-wrapper unselectedTrack">
+						<div id="Wahl_Track2" class="trackWahl-label">choose Sample</div>
+						<img id="btn_track2Wahl" class="select-arrow" src="images/btn_list.png">
+					</div>
+					<img id="btn_track2next" class="next-arrow" src="images/btn_next.png">
+					<button class="btn_track_play" id="btn_track2_play">Start</button>
+					<!-- Track 3 -->
+					<div class="track-label">Track 3: </div>
+					<img id="btn_track3previous" class="previous-arrow" src="images/btn_previous.png">
+					<div id="track3Select" class="trackWahl-wrapper unselectedTrack">
+						<div id="Wahl_Track3" class="trackWahl-label">choose Sample</div>
+						<img id="btn_track3Wahl" class="select-arrow" src="images/btn_list.png">
+					</div>
+					<img id="btn_track3next" class="next-arrow" src="images/btn_next.png">
+					<button class="btn_track_play" id="btn_track3_play">Start</button>
+					<!-- Track 4 -->
+					<div class="track-label">Track 4: </div>
+					<img id="btn_track4previous" class="previous-arrow" src="images/btn_previous.png">
+					<div id="track4Select" class="trackWahl-wrapper unselectedTrack">
+						<div id="Wahl_Track4" class="trackWahl-label">choose Sample</div>
+						<img id="btn_track4Wahl" class="select-arrow" src="images/btn_list.png">
+					</div>
+					<img id="btn_track4next" class="next-arrow" src="images/btn_next.png">
+					<button class="btn_track_play" id="btn_track4_play">Start</button>
+				</div>
+				
+					<!-- DropDown -->
+					<div id="dropdown">
+						<ul>
+							<div class="list-title">Bass</div>
+							<li class="list-items" id="0">Bass Sample 1</li>
+							<li class="list-items" id="1">Bass Sample 2</li>
+							<li class="list-items" id="2">Bass Sample 3</li>
+							<li class="list-items" id="3">Bass Sample 4</li>
+						</ul>
+						<ul>
+							<div class="list-title">Synth</div>
+							<li class="list-items" id="4">Synth Sample 1</li>
+							<li class="list-items" id="5">Synth Sample 2</li>
+							<li class="list-items" id="6">Synth Sample 3</li>
+							<li class="list-items" id="7">Synth Sample 4</li>
+						</ul>
+						<ul>
+							<div class="list-title">Fx</div>
+							<li class="list-items" id="8">Fx Sample 1</li>
+							<li class="list-items" id="9">Fx Sample 2</li>
+							<li class="list-items" id="10">Fx Sample 3</li>
+							<li class="list-items" id="11">Fx Sample 4</li>
+						</ul>
+						<ul>
+							<div class="list-title">Brass</div>
+							<li class="list-items" id="12">Brass Sample 1</li>
+							<li class="list-items" id="13">Brass Sample 2</li>
+							<li class="list-items" id="14">Brass Sample 3</li>
+							<li class="list-items" id="15">Brass Sample 4</li>
+						</ul>
+						<ul>
+							<div class="list-title">Strings</div>
+							<li class="list-items" id="16">String Sample 1</li>
+							<li class="list-items" id="17">String Sample 2</li>
+							<li class="list-items" id="18">String Sample 3</li>
+							<li class="list-items" id="19">String Sample 4</li>
+						</ul>
+						<img id="btn_dropdown_close" src="images/btn_close.png">
+					</div>
+					
+				<!-- Coverflow -->
+				<img id="plattenbox" src="images/plattenbox.png">
+				<div id="plattenOverlay">
+					<section id="dg-container" class="dg-container">
+						<div class="dg-wrapper">
+							<a href="#" id="cover1" draggable="true" class="cover"><img id="img_cover1" src="images/cover/cover1.png"></a>
+							<a href="#" id="cover2" draggable="true" class="cover"><img id="img_cover2" src="images/cover/cover2.png"></a>
+							<a href="#" id="cover3" draggable="true" class="cover"><img id="img_cover3" src="images/cover/cover3.png"></a>
+							<a href="#" id="cover4" draggable="true" class="cover"><img id="img_cover4" src="images/cover/cover4.png"></a>
+							<a href="#" id="cover5" draggable="true" class="cover"><img id="img_cover5" src="images/cover/cover5.png"></a>
+						</div>
+						<nav>
+							<span class="dg-prev"><</span>
+							<span class="dg-next">></span>
+						</nav>
+					</section>
+					<img id="btn_coverflow_close" src="images/btn_close.png">
+				</div>
+				
+				<!-- Drum Machine -->
+				<div id="drummachineWrapper" class="metalpattern boxshadow">
+					<div id="drumMachineLabels">
+						<div class="drumMachine-label">Kick</div>
+						<div class="drumMachine-label">Snare</div>
+						<div class="drumMachine-label">Hi-Hat</div>
+						<div class="drumMachine-label">Claps</div>
+						<div class="drumMachine-label">Special 1</div>
+						<div class="drumMachine-label">Special 2</div>
+					</div>
+					<div class="btn_drumMachinePad">
+						<!-- Buttons Kick -->
+						<span class="drumMachineBackground1">
+							<button id="btn_kickOnNote1"></button>
+							<button id="btn_kickOnNote2"></button>
+							<button id="btn_kickOnNote3"></button>
+							<button id="btn_kickOnNote4"></button>
+						</span>
+						<span class="drumMachineBackground2">
+							<button id="btn_kickOnNote5"></button>
+							<button id="btn_kickOnNote6"></button>
+							<button id="btn_kickOnNote7"></button>
+							<button id="btn_kickOnNote8"></button>
+						</span>	
+						<span class="drumMachineBackground1">
+							<button id="btn_kickOnNote9"></button>
+							<button id="btn_kickOnNote10"></button>
+							<button id="btn_kickOnNote11"></button>
+							<button id="btn_kickOnNote12"></button>
+						</span>
+						<span class="drumMachineBackground2">
+							<button id="btn_kickOnNote13"></button>
+							<button id="btn_kickOnNote14"></button>
+							<button id="btn_kickOnNote15"></button>
+							<button id="btn_kickOnNote16"></button>
+						</span>	
+						<br/>
+						<!-- Buttons Snare -->
+						<span class="drumMachineBackground1">
+							<button id="btn_snareOnNote1"></button>
+							<button id="btn_snareOnNote2"></button>
+							<button id="btn_snareOnNote3"></button>
+							<button id="btn_snareOnNote4"></button>
+						</span>
+						<span class="drumMachineBackground2">
+							<button id="btn_snareOnNote5"></button>
+							<button id="btn_snareOnNote6"></button>
+							<button id="btn_snareOnNote7"></button>
+							<button id="btn_snareOnNote8"></button>
+						</span>
+						<span class="drumMachineBackground1">
+							<button id="btn_snareOnNote9"></button>
+							<button id="btn_snareOnNote10"></button>
+							<button id="btn_snareOnNote11"></button>
+							<button id="btn_snareOnNote12"></button>
+						</span>
+						<span class="drumMachineBackground2">
+							<button id="btn_snareOnNote13"></button>
+							<button id="btn_snareOnNote14"></button>
+							<button id="btn_snareOnNote15"></button>
+							<button id="btn_snareOnNote16"></button>
+						</span>
+						<br/>
+						<!-- Buttons Hihat Close -->
+						<span class="drumMachineBackground1">
+							<button id="btn_hihatOnNote1"></button>
+							<button id="btn_hihatOnNote2"></button>
+							<button id="btn_hihatOnNote3"></button>
+							<button id="btn_hihatOnNote4"></button>
+						</span>
+						<span class="drumMachineBackground2">
+							<button id="btn_hihatOnNote5"></button>
+							<button id="btn_hihatOnNote6"></button>
+							<button id="btn_hihatOnNote7"></button>
+							<button id="btn_hihatOnNote8"></button>
+						</span>
+						<span class="drumMachineBackground1">
+							<button id="btn_hihatOnNote9"></button>
+							<button id="btn_hihatOnNote10"></button>
+							<button id="btn_hihatOnNote11"></button>
+							<button id="btn_hihatOnNote12"></button>
+						</span>
+						<span class="drumMachineBackground2">
+							<button id="btn_hihatOnNote13"></button>
+							<button id="btn_hihatOnNote14"></button>
+							<button id="btn_hihatOnNote15"></button>
+							<button id="btn_hihatOnNote16"></button>
+						</span>
+						<br/>
+						<!-- Buttons Hihat Open -->
+						<span class="drumMachineBackground1">
+							<button id="btn_hihatOpenOnNote1"></button>
+							<button id="btn_hihatOpenOnNote2"></button>
+							<button id="btn_hihatOpenOnNote3"></button>
+							<button id="btn_hihatOpenOnNote4"></button>
+						</span>
+						<span class="drumMachineBackground2">
+							<button id="btn_hihatOpenOnNote5"></button>
+							<button id="btn_hihatOpenOnNote6"></button>
+							<button id="btn_hihatOpenOnNote7"></button>
+							<button id="btn_hihatOpenOnNote8"></button>
+						</span>
+						<span class="drumMachineBackground1">
+							<button id="btn_hihatOpenOnNote9"></button>
+							<button id="btn_hihatOpenOnNote10"></button>
+							<button id="btn_hihatOpenOnNote11"></button>
+							<button id="btn_hihatOpenOnNote12"></button>
+						</span>
+						<span class="drumMachineBackground2">
+							<button id="btn_hihatOpenOnNote13"></button>
+							<button id="btn_hihatOpenOnNote14"></button>
+							<button id="btn_hihatOpenOnNote15"></button>
+							<button id="btn_hihatOpenOnNote16"></button>
+						</span>
+						<br/>
+						<!-- Buttons Special1 -->
+						<span class="drumMachineBackground1">
+							<button id="btn_specialOneOnNote1"></button>
+							<button id="btn_specialOneOnNote2"></button>
+							<button id="btn_specialOneOnNote3"></button>
+							<button id="btn_specialOneOnNote4"></button>
+						</span>
+						<span class="drumMachineBackground2">
+							<button id="btn_specialOneOnNote5"></button>
+							<button id="btn_specialOneOnNote6"></button>
+							<button id="btn_specialOneOnNote7"></button>
+							<button id="btn_specialOneOnNote8"></button>
+						</span>
+						<span class="drumMachineBackground1">
+							<button id="btn_specialOneOnNote9"></button>
+							<button id="btn_specialOneOnNote10"></button>
+							<button id="btn_specialOneOnNote11"></button>
+							<button id="btn_specialOneOnNote12"></button>
+						</span>
+						<span class="drumMachineBackground2">
+							<button id="btn_specialOneOnNote13"></button>
+							<button id="btn_specialOneOnNote14"></button>
+							<button id="btn_specialOneOnNote15"></button>
+							<button id="btn_specialOneOnNote16"></button>
+						</span>
+						<br/>
+						<!-- Buttons Special2 -->
+						<span class="drumMachineBackground1">
+							<button id="btn_specialTwoOnNote1"></button>
+							<button id="btn_specialTwoOnNote2"></button>
+							<button id="btn_specialTwoOnNote3"></button>
+							<button id="btn_specialTwoOnNote4"></button>
+						</span>
+						<span class="drumMachineBackground2">
+							<button id="btn_specialTwoOnNote5"></button>
+							<button id="btn_specialTwoOnNote6"></button>
+							<button id="btn_specialTwoOnNote7"></button>
+							<button id="btn_specialTwoOnNote8"></button>
+						</span>
+						<span class="drumMachineBackground1">
+							<button id="btn_specialTwoOnNote9"></button>
+							<button id="btn_specialTwoOnNote10"></button>
+							<button id="btn_specialTwoOnNote11"></button>
+							<button id="btn_specialTwoOnNote12"></button>
+						</span>
+						<span class="drumMachineBackground2">
+							<button id="btn_specialTwoOnNote13"></button>
+							<button id="btn_specialTwoOnNote14"></button>
+							<button id="btn_specialTwoOnNote15"></button>
+							<button id="btn_specialTwoOnNote16"></button>
+						</span>
+						<br/>
+						<br/>
+						<!--Buttons zum Auswählen der Sound-Sets für die DrumMachine-->
+						<div class="btn_drum_sets">
+							<button id="btn_set1">Set 1</button>
+							<button id="btn_set2">Set 2</button>
+							<button id="btn_set3">Set 3</button>
+						</div>
+						<div class="btn_drum_partitur">
+							<button id="btn_savePartitur_1">Save</button>
+							<button id="btn_Partitur1">P1</button>
+						</div>
+						<div class="btn_drum_partitur">
+							<button id="btn_savePartitur_2">Save</button>
+							<button id="btn_Partitur2">P2</button>
+						</div>
+						<button id="btn_startDrummachine">Stop</button>
+					</div>
+				</div>
+				
+			</div>
+			&#169; Michael Adlfinger, Susanne Forster & Lukas Lamm 2012. All rights reserved
+		</div>
+		<script src="js/app.js"></script>
+		<script src="js/audioBuffer.js"></script>
+		<script src="js/model.js"></script>
+		<script src="js/controller.js"></script>
+		<script src="js/viewLoadingScreen.js"></script>
+		<script src="js/viewDrummachine.js"></script>
+		<script src="js/viewEqualizer.js"></script>
+		<script src="js/viewMetronom.js"></script>
+		<script src="js/viewPlatten.js"></script>
+		<script src="js/viewSpuren.js"></script>
+		<script src="js/viewGroovy.js"></script>
+		<script src="js/viewFilter.js"></script>
+		<script src="js/viewKeyboard.js"></script>
+		<script>
+			$(function() {
+				DJ.init();
+			});
+		</script>
+		<script>
+	      	$(document).ready(function() {
+			
+				// Apply fancybox to multiple items
+				
+				$("a.help").fancybox({
+					'transitionIn'	:	'none',
+					'transitionOut'	:	'none',
+					'autoScale'     :   false,
+					'speedIn'		:	600, 
+					'speedOut'		:	200, 
+					'overlayShow'	:	true,
+					'onComplete': function () { $("body").css("overflow", "hidden"); },
+					'type' 			:   'iframe',
+					/*'scrolling'     :   'no',*/
+					'height'		:   '90%',
+					'width' 		:   '85%'
+				});
+				
+			});
+	    </script>
+	</body>
+</html>

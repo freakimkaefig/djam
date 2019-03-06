@@ -1,0 +1,914 @@
+@font-face {
+    font-family: OstrichSansBold;
+    src: url(../font/ostrich-bold.ttf);
+  }
+
+html {
+	font-family: Helvetica;
+	color:#EEEEEE;
+	background: #000000;
+}
+
+body {
+	background:#000000;
+	background-size: 100%;
+}
+
+button {
+	border: 1px solid #000;
+  	-webkit-border-radius: 5px;
+  	border-radius: 5px;
+  	cursor: pointer;
+  	font-weight:bold;
+  	color:#222222;
+}
+
+a {
+	text-decoration: none;
+	color: #000;
+	cursor: pointer;
+}
+
+a :visited{
+	text-decoration: none;
+	color: #000;
+}
+
+a :active{
+	text-decoration: none;
+	color: #000;
+}
+
+iframe {
+	overflow: hidden;
+}
+
+/* Fokus-outline von Chrome vermeiden*/
+:focus {
+	outline: none;
+}
+
+/*-------------- Loading Screen -----------------*/
+#loadingOverlay {
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: block;
+	background: #000;
+	z-index: 1000;
+	opacity: 0.8;
+	box-shadow: 0px 0px 20px 10px rgba(255, 255, 255, 1);
+	transform: scale(0.9);
+}
+
+.overflow-hidden {
+	overflow: hidden;
+}
+
+.invisible {
+	visibility: hidden;
+}
+
+.curtain {
+	position: absolute;
+	height: 100%;
+	width: 50%;
+	z-index: 2000;
+}
+
+#loadingSign {
+	position: absolute;
+	left: 50%;
+	top: -50%;
+	margin-left: -150px;
+	height: 100px;
+	width: 300px;
+	background: #111;
+	z-index: 3000;
+	font-size: 4em;
+	text-align: center;
+	padding-top: 50px;
+	border-radius: 20px;
+	font-family: OstrichSansBold;
+    border: 3px solid #fff;
+    box-shadow: inset 0 0 5px #fff, 0 0 10px #fff, inset 0 0 10px #ff0, 0 0 20px #ff0, inset 0 0 20px #ff0, 0 0 30px #ff0;
+    
+}
+
+#loadingSign span {
+	color: #fff;
+    text-shadow: 0 0 10px #fff, 0 0 20px #ff0, 0 0 30px #ff0;
+	
+}
+
+
+
+#curtainRight {
+	left: 50%;
+}
+
+#app {
+	position: relative;
+	height: 900px;
+	width: 1400px;
+	margin: auto;
+}
+
+/*- 1 --------------------- Hintergrund ----------------------------*/
+.metalpattern {
+	border: 3px solid #000;
+	background: url(../images/hintergrund.png);
+	background-size: 100%;
+  	-webkit-border-radius: 10px;
+  	border-radius: 10px;
+}
+
+.boxshadow {
+	-webkit-box-shadow: 5px 5px 4px #000;
+	box-shadow: 5px 5px 4px #000;
+}
+
+
+/*- 1 ---------------------------- oben -------------------------------------*/
+
+#oben {
+	height: 255px;	
+}
+	/*- 2 -------- Filter ----------*/
+	
+	#filterWrapper {
+		position:absolute;
+		height: 250px;
+		width: 400px;
+		margin: 5px auto 0px auto;
+		display: inline-block;
+	}
+	#filterLow {
+			position: absolute;
+			width: 198px;
+			height: 250px;
+			margin-left: 0px;
+			border-right: 2px solid #222;
+		}
+	#filterLowSlider {
+			margin-top: 200px;
+			margin-left: 20px;
+		}
+	#filterHigh {
+			position: absolute;
+			width: 199px;
+			height: 250px;
+			margin-left: 200px;
+		}
+	#filterHighSlider {
+			margin-top: 200px;
+			margin-left: 20px;
+		}
+	.btn_filter_clicked {
+		background-color: #ff5;
+	}
+	
+	.f-button{
+		
+		margin-left: 10px;
+		margin-top: 5px;
+		display:block;
+		width: 130px;
+		height: 20px;
+		
+		border-left: 0.5px solid #fff;
+		border-top: 0.5px solid #fff;
+		border-right: 1px solid #555;
+		border-bottom: 2px solid #333;
+		
+		-webkit-box-shadow: inset 0 0 20px #999;
+	    box-shadow: inset 0 0 20px #999;
+	}
+	#f_block_btn{
+		position: absolute;
+		margin-left:20px;
+		margin-top:10px;
+	}
+	
+	.filter-module-label{
+		text-align: center;
+		margin-top:3px;
+	}
+
+	/*- 2 -------- Metronom ----------*/
+	
+	#metronomWrapper {
+		position: absolute;
+		height: 60px;
+		width: 300px;
+		left: 43%;
+		margin: 5px auto 0px auto;
+	}
+	
+	.metronomBeat {
+		position: relative;
+		width:50px;
+		height:30px;
+		display: inline-block;
+		background-color: #666;
+		border-radius: 10px;
+	}
+	
+	.currentQuarter {
+		background-color: #0a6;
+	}
+	
+	/*- 2 -------- Groovy ------------*/
+	
+	#groovyWrapper {
+		position: absolute;
+		height: 270px;
+		width: 250px;
+		right: 1%;
+		margin-top: 25px;
+		display: inline-block;
+	}
+	
+	#groovyImage {
+		height: 250px;
+		width: 250px;
+		position: absolute;
+		bottom: 0px;
+		left: 0px;
+		cursor: pointer;
+	}
+	
+	#groovyImageBubble {
+		position: absolute;
+		height: 380px;
+		margin: -10px 250px 0px -450px;
+		-webkit-transform: rotate(10deg);
+		z-index: 400;
+	}
+	
+	#groovyThinkBubble {
+		height: 100px;
+		position: absolute;
+		margin: 0px 0px 0px 200px;
+	}
+	
+	#groovyThinkBubbleContent {
+		position: absolute;
+		font-size: 2.5em;
+		margin: 10px 0px 0px 250px;
+		color: #000000;
+	}
+	
+	#groovyInfo {
+		position: absolute;
+		width: 350px;
+		margin: 130px 250px 0px -400px;
+		z-index: 500;
+		border-bottom-left-radius: 50px;
+		color: #000;
+	}
+	
+	.groovy {
+		background: #f00;
+	}
+	
+	#btn_help {
+		float: right;
+	}
+	
+		/*---------- Hilfe ----------*/
+		#help_body ul{
+			cursor: default;
+			background: rgba(45, 45, 45, 0.9);
+		}
+		
+		li.title-help{
+			padding: 5px;
+			background: #4691E5;
+			border-radius: 5px;
+			cursor: default;
+		}
+		
+		li.title-help:hover{
+			padding: 5px;
+			background: #4691E5;
+			border-radius: 5px;
+			cursor: default;
+		}
+		
+		.no-hover:hover{
+			list-style: none;
+			background: none;
+			cursor: default;
+		}
+		
+		.wrapper-ul {
+			width: 100%;
+			background: none;
+			margin: 0px;
+		}
+		
+		table {
+			background: rgba(65, 65, 65, 0.9);
+		}
+		
+		.tipp-block {
+			text-align: center;
+			display: inline;
+			list-style: none;
+			cursor: default;
+			width: 300px;
+			float: left;
+			margin: 15px;
+		}
+		
+		#tastatur-tipp {
+			margin-left: 1.25%;
+		}
+		
+		/*h2 {
+			padding: 5px;
+			background: #4691E5;
+			border-radius: 5px;
+			cursor: default;
+		}*/
+		
+		
+	#logoWrapper {
+		position: absolute;
+		top: 50px;
+		width: 450px;
+		height: 150px;
+		left: 34%;
+		background: url(../images/logo.png) no-repeat center center;
+	}
+		
+
+/*- 1 ---------------------------- mitte ------------------------------------*/
+
+#mitte {
+	height: 315px;
+}
+
+	/*- 2 -------- Equalizer ----------*/
+	
+	.btn_mute_clicked {
+		background-color: #0a6;
+		color:#EEEEEE;
+		
+		-webkit-box-shadow: inset 0 0 20px #999;
+	    box-shadow: inset 0 0 20px #999;
+	}
+	
+	.btn_solo_clicked {
+		background-color: #0a6;
+		color:#EEEEEE;
+		
+		 -webkit-box-shadow: inset 0 0 20px #999;
+	    box-shadow: inset 0 0 20px #999;
+	}
+	
+	#equalizerWrapper {
+		position: relative;
+		height: 250px;
+		width: 720px;
+		margin: auto 5px 25px 5px;
+		display: inline-table;
+	}
+	
+		/*- 3 ----- MasterVolume ------*/
+		#eqMaster {
+			width: 60px;
+			border-right: 1px solid #222;
+		}
+	
+		.btn_hidden {
+			visibility: hidden;
+		}
+	
+		/*- 3 ----- DrumMachineVolume -------*/
+		#eqDrumMachine {
+			width: 110px;
+			margin-left: 65px;
+			border-right: 1px solid #222;
+		}
+	
+		/*- 3 ----- Turntables Volume/Croosfader -----*/
+		#eqTurntables {
+			width: 240px;
+			margin-left: 175px;
+			border-right: 1px solid #222;
+		}
+	
+		#ttLeftSlider {
+			margin-right: 75px;
+		}
+		
+		#tt-label-left {
+			margin-right: 75px;
+			
+		}
+	
+		#ttRightSlider {
+			margin-left: 75px;
+		}
+	
+		#tt-label-right {
+			margin-left: 75px;
+		}
+	
+		#ttCrossfadeSlider {
+		}
+		
+		/*- 3 ------Tracks Volume -----*/
+		#eqTracks {
+			width: 287px;
+			margin-left: 425px;
+		}
+		
+		#eqTrackWrapper {
+			display: inline-block;
+		}
+
+		.btn-tracks {
+			margin-bottom: 15px;
+		}
+		
+		#track1Slider {
+			margin: 0px 15px 0px 25px;
+		}
+	
+		#track2Slider {
+			margin: 0px 15px 0px 25px;
+		}
+		
+		#track3Slider {
+			margin: 0px 20px 0px 25px;
+		}
+		
+		#track4Slider {
+			margin: 0px 25px 0px 25px;
+		}
+		
+		.label-tracks {
+			margin-top: 10px;
+		}
+
+		/*- 3 --- Wrapper und Klassen für Module (Master, DrumMachine, Turntables, Tracks) -----*/
+		.eq-module-label {
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+		
+		.equalizerModuleWrapper {
+			height: 237px;
+			margin: 5px 0px 5px 5px;
+			/*border: 1px solid #f00;*/
+			text-align: center;
+			position: absolute;
+		}
+	
+		.slider-container {
+			/*border: 1px solid #f00;*/
+			display: inline-block;
+		}
+		
+		.slider-vertical {
+			position: relative;
+			height: 150px;
+			margin: 15px 0px 10px 0px;
+		}
+		
+		.slider-horizontal {
+			width: 140px;
+			border: 1px solid #f00;
+		}
+	
+	
+	/*- 2 ---------------- Turntables ------------*/
+	
+	.turntableWrapper {
+		position: relative;
+		height: 300px;
+		width: 320px;
+		margin: 5px 0px 0px 0px;
+		display: inline-table;
+	}
+	
+	.transform-record {
+		width: 214px;
+		height: 214px;
+		border-radius: 107px;
+		margin: 13.5px;
+	}
+	
+	.tt-body {
+		position: absolute;
+		height: 240px;
+		width: 299px;
+		margin: 25px 0px 0px 15px;
+		background: url(../images/body.png) no-repeat;
+	}
+	
+	.plattenteller {
+		position: absolute;
+		height: 241px;
+		width: 241px;
+		margin: 25px 0px 0px 15px;
+		background: url(../images/plattenteller.png) no-repeat;
+	}
+	
+	.arm {
+		position: absolute;
+		height: 100px;
+		width: 55px;
+		margin: 10px 0px 0px 246px;
+	}
+	
+	.dragzone {
+		position: absolute;
+		height: 222px;
+		width: 90px;
+		margin: 10px 0px 0px 216px;
+	}
+	
+	.tt-sampleWahl {
+		position: absolute;
+		margin: 270px 0px 0px 25px;
+	}
+	
+	.btn-tt-playPause {
+		position: absolute;
+		height: 40px;
+		width: 50px;
+		margin: 250px 0px 0px 250px;
+		
+		background-color: #fff;
+		
+		border-left: 0.5px solid #fff;
+		border-top: 0.5px solid #fff;
+		border-right: 1px solid #555;
+		border-bottom: 2px solid #333;
+		
+		-webkit-box-shadow: inset 0 0 20px #999;
+	    box-shadow: inset 0 0 20px #999;
+	}
+	
+	@-webkit-keyframes rotate-animation {
+		from {
+			-webkit-transform: rotate(0deg);
+		}
+		to {
+			
+			-webkit-transform: rotate(360deg);
+		}
+	}
+	
+	.tt-rotate-animation {
+		-webkit-animation: rotate-animation 8s infinite;
+		-webkit-animation-timing-function: linear;
+		-webkit-animation-play-state: paused;
+	}
+	
+	/*- 2 -------- Plattenbox -----------*/
+	
+	#plattenbox {
+		height: 220px;
+		position: absolute;
+		margin: 45px 0px 0px 25px;
+		cursor: pointer;
+	}
+	
+	#plattenOverlay {
+		position: absolute;
+		background: rgba(0, 0, 0, 0.8);
+		height: 300px;
+		width: 1000px;
+		z-index: 800;
+		border-radius: 5px;
+		border-radius: 10px;
+	}
+	
+	/*- 2 ------- Coverflow --------*/
+	div.wrapper {
+		height: 450px;
+		width: 800px;
+		padding: 10px;
+		overflow: hidden;
+		position: relative;
+		margin: 0 auto;
+	}
+	
+	#btn_coverflow_close {
+		height: 24px;
+		width: 24px;
+		cursor: pointer;
+		position: absolute;
+		margin: -290px 0px 0px 965px;
+	}
+
+	.cover {
+		margin-top: 30px;
+		height: 214px;
+		width: 214px;
+	}
+	
+	.dragOver {
+		border-radius: 121px;
+		opacity: 0.5;
+		background: #fff;
+	}
+
+
+
+/*- 1 ---------------------------- unten ------------------------------------*/
+
+#unten {
+	width: 100%;
+}
+
+	
+
+	/*- 2 -------- Drum Machine ----------*/
+	
+	#drummachineWrapper {
+		position: relative;
+		height: 325px;
+		width: 685px;
+		margin: 0px 5px 5px 700px;
+		display: inline-table;
+	}
+	
+	#drumMachineLabels {
+		position: absolute;
+		margin: 16px 0px 0px 5px;
+		width: 100px;
+	}
+	
+	.drumMachine-label {
+		height: 32px;
+		margin: 2px 5px 4px 0px;
+		text-align: right;
+	}
+	
+	.btn_drumMachinePad {
+		position: absolute;
+		margin-left: 120px;
+		margin-top: 10px;
+	}
+	
+	.btn_drumMachinePad button{
+		width:30px;
+		height:30px;
+		color: #fff;
+		/*background-color: #99ef6d;*/
+		/*background-color: #99cccc;*/
+		background-color: #fff;
+		
+		border: 1px solid #aaa;
+		
+		border-left: 0.5px solid #fff;
+		border-top: 0.5px solid #fff;
+		border-right: 1px solid #555;
+		border-bottom: 2px solid #333;
+		
+	    -webkit-box-shadow: inset 0 0 20px #999;
+	    box-shadow: inset 0 0 20px #999;
+		  /*box-shadow: 2px 2px 2px 2px green;*/
+	  
+		border-radius:6px;
+		
+		margin-top: 1px;
+		margin-bottom: 1px;
+	}
+	
+	button.btn_drumMachinePad_activated {
+		background-color: #CC0066;
+		width: 30px;
+		height:30px;
+	}
+	button.btn_drumMachinePad_moving{
+		background-color: #0a6;
+		width: 30px;
+		height:30px;
+		
+		transition: all 0.05s ease;
+	    -webkit-transition: all 0.1s ease;
+
+
+	}
+	
+	.drumMachineBackground1{
+		/*background-color:#555;*/
+		color: #fff;
+		background-color:#369;
+		display: inline-block;
+		padding-right: 3px;
+		padding-left: 3px;
+		margin-right: -4px;
+		margin-top: 2px;
+		margin-bottom: 2px;
+		border-radius:6px;
+	}
+	
+	.drumMachineBackground2{
+		color: #fff;
+		background-color: #258;
+		border-radius:6px;
+		display: inline-block;
+		padding-right: 3px;
+		padding-left: 3px;
+		margin-right: -4px;
+		margin-top: 2px;
+		margin-bottom: 2px;
+	}
+	
+	.btn_drum_sets button{
+		margin-top: 15px;
+		margin-right: 10px;
+		float: left;
+		background-color: #ff5;
+		position: relative;
+		width: 50px;
+		height: 40px;
+		display: inline-block;
+		color: #222222;
+	}
+	
+	.btn_drum_partitur button{
+		margin-top: 15px;
+		float:left;
+		margin-left: 10px;
+		background-color: #ff5;
+		position: relative;
+		width: 50px;
+		height: 40px;
+		display: inline-block;
+		color:#222222;
+	}
+	
+	#btn_savePartitur_1 {
+		margin-left: 30px;
+	}
+	
+	#btn_savePartitur_2 {
+		margin-left: 30px;
+	}
+	
+	#btn_startDrummachine{
+		margin-top: 15px; 
+		margin-left: 150px;
+		background-color: #fff;
+		position: absolute;
+		width: 50px;
+		height: 40px;
+		display: inline-block;
+		color:#222222;
+		
+	}
+	
+	
+	
+	
+		/*- 2 ------------------- Spuren ----------------------*/
+	
+	#spurenWrapper {
+		height: 250px;
+		width: 400px;
+		margin: 35px 5px 5px 260px;
+		position: absolute;
+		display: inline-block;
+	}
+	
+	.track-label {
+		position: absolute;
+		margin-left: 30px;
+		margin-top: 5px;
+	}
+	.track-label:first-child {
+		margin-top: 32px;
+	}
+	
+	.selectedTrack {
+		background: #4691E5;
+		color: #000000;
+	}
+	
+	.unselectedTrack {
+		background: #0a6;
+	}
+	
+	.trackWahl-wrapper {
+		margin: 30px 0px 30px 130px;
+		width: 148px;
+		border: 1px solid #000;
+		height: 24px;
+		cursor: pointer;
+	}
+	
+	.trackWahl-label {
+		margin: 2px 0px 0px 5px;
+		position: absolute;
+		color: #eee;
+	}	
+
+	.select-arrow {
+		margin-left: 124px;
+		height: 24px;
+		width: 24px;
+	}
+	
+	.sample-list {
+		background: #eee;
+		border: 1px solid #000;
+		z-index: 201;
+	}
+	
+	.btn_track_play {
+		position: absolute;
+		margin-left: 330px;
+		margin-top: -52px;
+		
+		border-left: 0.5px solid #fff;
+		border-top: 0.5px solid #fff;
+		border-right: 1px solid #555;
+		border-bottom: 2px solid #333;
+		
+		-webkit-box-shadow: inset 0 0 20px #999;
+	    box-shadow: inset 0 0 20px #999;
+	}
+	
+	.next-arrow {
+		height: 20px;
+		width: 20px;
+		position: absolute;
+		margin: -53px 0px 0px 280px;
+		cursor: pointer;
+	}
+	
+	.previous-arrow {
+		height: 20px;
+		width: 20px;
+		position: absolute;
+		margin: 2px 0px 0px 110px;
+		cursor: pointer;
+	}
+	.previous-arrow:nth-child(2) {
+		margin-top: 32px;
+	}
+	
+	#dropdown {
+		position: absolute;
+		margin: 35px 0px 0px 565px;
+		z-index: 15;
+		display: inline-block;
+		height: 240px;
+		width: 780px;
+		background: rgba(0, 0, 0, 0.8);
+		color: #fff;
+		padding: 10px;
+		border-radius: 5px;
+	}
+	
+	#btn_dropdown_close {
+		height: 24px;
+		width: 24px;
+		position: absolute;
+		margin-left: 5px;
+		cursor: pointer;
+	}
+	
+	.list-title {
+		margin: 5px 20px 20px 20px;
+		text-align: center;
+		font-size: 19px;
+	}
+	
+	ul {
+		display: inline-block;
+		padding-left: 0px;
+		margin-top: 5px;
+		border-radius: 5px;
+		background: rgba(55, 55, 55, 0.9);
+	}
+	
+	li {
+		list-style: none;
+		margin: 15px;
+		padding: 5px;
+	}
+	
+	li:hover {
+		padding: 5px;
+		background: #4691E5;
+		border-radius: 5px;
+		cursor: pointer;
+	}
+	
+		.cursor-pointer {
+		cursor: pointer;
+	}
+	
+	
